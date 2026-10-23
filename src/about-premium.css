@@ -1,0 +1,423 @@
+/* ============================================================
+   ABOUT SECTION — premium white & blue redesign
+   Every rule is scoped under .about-premium so nothing else on
+   the site is affected. Backdrop effects: AboutBackdrop.js
+   ============================================================ */
+
+.about-premium {
+  /* ---- the three knobs you may want to tweak for YOUR photo ---- */
+  --ap-focus: 50% 50%;            /* which part of the photo stays visible if it is ever cropped (x y) */
+  --ap-ratio-desktop: 1169 / 1509; /* your photo's own shape, so nothing is cropped */
+  --ap-ratio-mobile: 1169 / 1509;  /* same on tablets and phones */
+
+  --ap-aqua: #3b8ff0;
+  --ap-aqua-soft: #bfdbfe;
+  --ap-sky: #bfe0fa;
+  --ap-deep: #0b2545;
+
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 6.5rem 0 9rem;
+  background:
+    radial-gradient(900px 520px at 88% 6%, rgba(96, 165, 250, 0.30), transparent 62%),
+    radial-gradient(820px 620px at 2% 94%, rgba(125, 190, 250, 0.26), transparent 64%),
+    linear-gradient(180deg, #ffffff 0%, #f0f6ff 20%, #e4eefd 62%, #f4f8ff 100%);
+}
+.about-premium > .container { position: relative; z-index: 2; }
+
+/* ---------- layout ---------- */
+.about-premium .ap-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: "text" "media" "card";
+  gap: 2.75rem;
+}
+.about-premium .ap-text { grid-area: text; }
+.about-premium .ap-media-wrap { grid-area: media; }
+.about-premium .ap-card-wrap { grid-area: card; }
+
+@media (min-width: 992px) {
+  .about-premium .ap-grid {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    grid-template-areas: "text media" "card media";
+    column-gap: 5rem;
+    row-gap: 2.25rem;
+    align-content: center;
+  }
+  .about-premium .ap-text { align-self: end; }
+  .about-premium .ap-card-wrap { align-self: start; }
+  .about-premium .ap-media-wrap { align-self: center; }
+}
+
+/* ---------- typography ---------- */
+.about-premium .section-title { margin-bottom: 1.5rem; }
+.about-premium .section-title h2 {
+  color: var(--ap-deep);
+  font-size: clamp(2.1rem, 4.4vw, 3.2rem);
+  font-weight: 800;
+  letter-spacing: -0.028em;
+  line-height: 1.06;
+  margin-bottom: 1rem;
+}
+.about-premium .section-title .lead-text { color: #2f4a6b; font-size: 1.2rem; margin-bottom: 0; }
+.about-premium .section-title::after {
+  content: "";
+  display: block;
+  width: 78px;
+  height: 4px;
+  margin-top: 1.4rem;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--ap-aqua), #1e6fd9 70%, var(--ap-deep));
+}
+.about-premium .ap-text > p { color: #3d5573; max-width: 58ch; }
+.about-premium .ap-text > p:last-child { margin-bottom: 0; }
+
+/* ---------- scroll-reveal (slide-in variants of the existing .reveal) ---------- */
+.about-premium .reveal {
+  transition: opacity 0.9s ease, transform 1s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.about-premium .ap-from-left.reveal:not(.is-visible) { transform: translateX(-44px); }
+.about-premium .ap-from-right.reveal:not(.is-visible) { transform: translateX(44px); }
+
+/* ---------- glass info card (existing content, new look) ---------- */
+.about-premium .ap-card {
+  position: relative;
+  overflow: hidden;
+  padding: 2.1rem 2.2rem 2.2rem;
+  border-radius: 28px;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.64));
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  box-shadow:
+    0 34px 60px -26px rgba(11, 37, 69, 0.26),
+    0 0 0 1px rgba(20, 184, 196, 0.12),
+    inset 0 1px 0 #fff;
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  backdrop-filter: blur(14px) saturate(140%);
+  transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.45s ease;
+}
+.about-premium .ap-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 9%; right: 9%;
+  height: 3px;
+  border-radius: 0 0 6px 6px;
+  background: linear-gradient(90deg, transparent, var(--ap-aqua), #1e6fd9, transparent);
+}
+.about-premium .ap-card::after {
+  content: "";
+  position: absolute;
+  right: -90px; top: -90px;
+  width: 260px; height: 260px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(96, 165, 250, 0.28), transparent 68%);
+  pointer-events: none;
+}
+.about-premium .ap-card > * { position: relative; z-index: 1; }
+.about-premium .ap-card:hover {
+  transform: translateY(-5px);
+  box-shadow:
+    0 44px 70px -26px rgba(11, 37, 69, 0.32),
+    0 0 0 1px rgba(20, 184, 196, 0.22),
+    inset 0 1px 0 #fff;
+}
+.about-premium .ap-card .icon-tile {
+  position: relative;
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  margin-bottom: 1.25rem;
+  color: #fff;
+  background: linear-gradient(145deg, #60a5fa, #1e6fd9 48%, #1e6fd9);
+  box-shadow: 0 12px 24px -8px rgba(30, 111, 217, 0.6), inset 0 2px 4px rgba(255, 255, 255, 0.5);
+}
+.about-premium .ap-card .icon-tile::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid rgba(20, 184, 196, 0.5);
+  animation: ap-pulse 3.2s ease-out infinite;
+}
+.about-premium .ap-card h3 { color: var(--ap-deep); font-size: 1.45rem; letter-spacing: -0.015em; }
+.about-premium .ap-card p { color: #3d5573; }
+.about-premium .ap-card .city-row { justify-content: flex-start; margin-top: 1.4rem; gap: 0.65rem; }
+.about-premium .ap-card .city-chip {
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.95rem;
+  color: var(--ap-deep);
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(20, 184, 196, 0.3);
+  transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.about-premium .ap-card .city-chip::before {
+  content: "";
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #60a5fa, #1e6fd9);
+}
+.about-premium .ap-card .city-chip:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #e6f0ff, #dcecfc);
+  border-color: rgba(20, 184, 196, 0.6);
+  box-shadow: 0 10px 18px -10px rgba(30, 111, 217, 0.55);
+}
+
+/* ---------- photo: framed, never stretched or tilted ---------- */
+.about-premium .ap-media {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  margin-inline: auto;
+}
+.about-premium .ap-float { position: relative; z-index: 2; animation: ap-bob 9s ease-in-out infinite; }
+.about-premium .ap-plate {
+  position: absolute;
+  inset: 30px -24px -24px 30px;
+  border-radius: 40px;
+  background: linear-gradient(160deg, rgba(20, 184, 196, 0.6), rgba(30, 111, 217, 0.55) 60%, rgba(11, 37, 69, 0.75));
+  opacity: 0.26;
+}
+.about-premium .ap-frame {
+  position: relative;
+  padding: 10px;
+  border-radius: 36px;
+  background: linear-gradient(150deg, #ffffff 0%, #d9e8ff 46%, var(--ap-sky) 100%);
+  box-shadow:
+    0 44px 80px -30px rgba(11, 37, 69, 0.42),
+    0 18px 36px -18px rgba(30, 111, 217, 0.38),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.95);
+}
+.about-premium .ap-photo {
+  position: relative;
+  overflow: hidden;
+  border-radius: 27px;
+  aspect-ratio: var(--ap-ratio-desktop);
+  background: linear-gradient(160deg, #d9e8ff, var(--ap-sky));
+}
+.about-premium .ap-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--ap-focus);
+  transition: transform 1.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.about-premium .ap-frame:hover .ap-photo img { transform: scale(1.04); }
+.about-premium .ap-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+  pointer-events: none;
+}
+.about-premium .ap-glint {
+  position: absolute;
+  top: -10%; bottom: -10%; left: -60%;
+  width: 40%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+  transform: skewX(-18deg);
+  pointer-events: none;
+}
+.about-premium .ap-media-wrap.is-visible .ap-glint { animation: ap-glint 1.8s ease 0.7s 1 both; }
+.about-premium .ap-frame:hover .ap-glint { animation: ap-glint 1.2s ease 1 both; }
+
+/* ripples radiating from behind the photo */
+.about-premium .ap-ripple {
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 118%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1.5px solid rgba(20, 184, 196, 0.4);
+  background: radial-gradient(circle, transparent 60%, rgba(96, 165, 250, 0.12));
+  transform: translate(-50%, -50%) scale(0.55);
+  opacity: 0;
+  z-index: 0;
+  pointer-events: none;
+  animation: ap-ripple 9s ease-out infinite;
+}
+.about-premium .ap-ripple-2 { animation-delay: 3s; }
+.about-premium .ap-ripple-3 { animation-delay: 6s; }
+
+/* glassy bubbles + sparkles sitting on the frame edge (mostly outside the photo) */
+.about-premium .ap-orb {
+  position: absolute;
+  z-index: 3;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: ap-bob 6s ease-in-out infinite;
+}
+.about-premium .ap-orb-1 { width: 56px; height: 56px; left: -34px; top: 12%; }
+.about-premium .ap-orb-2 { width: 30px; height: 30px; right: -20px; top: 38%; animation-delay: -2s; animation-duration: 7s; }
+.about-premium .ap-orb-3 { width: 42px; height: 42px; left: 14%; bottom: -26px; animation-delay: -4s; }
+.about-premium .ap-gem { position: absolute; z-index: 3; pointer-events: none; }
+.about-premium .ap-gem-1 { width: 28px; height: 28px; right: -10px; top: -12px; }
+.about-premium .ap-gem-2 { width: 18px; height: 18px; left: -14px; bottom: 26%; animation-delay: -1.6s; }
+
+/* ---------- shared bubble look ---------- */
+.about-premium .ap-bubble,
+.about-premium .ap-orb {
+  background:
+    radial-gradient(circle at 30% 26%, rgba(255, 255, 255, 0.95) 0 7%, rgba(255, 255, 255, 0) 24%),
+    radial-gradient(circle at 72% 80%, rgba(96, 165, 250, 0.38), transparent 42%),
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.10) 55%, rgba(110, 200, 235, 0.30) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow:
+    inset 0 0 12px rgba(255, 255, 255, 0.6),
+    inset -4px -6px 14px rgba(30, 111, 217, 0.2),
+    0 6px 16px rgba(30, 111, 217, 0.12);
+}
+
+/* ---------- backdrop layers ---------- */
+.about-premium .ap-backdrop { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+.about-premium .ap-glow { position: absolute; border-radius: 50%; will-change: transform; }
+.about-premium .ap-glow-1 {
+  width: 720px; height: 720px; right: -200px; top: -220px;
+  background: radial-gradient(circle, rgba(96, 165, 250, 0.38), rgba(96, 165, 250, 0) 66%);
+  animation: ap-glow 22s ease-in-out infinite;
+}
+.about-premium .ap-glow-2 {
+  width: 640px; height: 640px; left: -220px; bottom: -120px;
+  background: radial-gradient(circle, rgba(116, 185, 250, 0.34), rgba(116, 185, 250, 0) 66%);
+  animation: ap-glow 26s ease-in-out -8s infinite;
+}
+.about-premium .ap-glow-3 {
+  width: 520px; height: 520px; left: 38%; top: 28%;
+  background: radial-gradient(circle, rgba(20, 184, 196, 0.14), rgba(20, 184, 196, 0) 68%);
+  animation: ap-glow 30s ease-in-out -14s infinite reverse;
+}
+.about-premium .ap-pattern {
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='48' viewBox='0 0 96 48'%3E%3Cpath d='M0 24 Q24 6 48 24 T96 24' fill='none' stroke='%231e6fd9' stroke-opacity='0.10' stroke-width='1.2'/%3E%3C/svg%3E");
+  background-size: 96px 48px;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 30%, #000 70%, transparent 100%);
+  mask-image: linear-gradient(180deg, transparent 0%, #000 30%, #000 70%, transparent 100%);
+}
+.about-premium .ap-flow {
+  position: absolute; top: 0; bottom: 0; left: 0;
+  width: 200%;
+  background: linear-gradient(100deg, rgba(103, 224, 232, 0) 0%, rgba(103, 224, 232, 0.2) 50%, rgba(103, 224, 232, 0) 100%);
+  background-size: 50% 100%;
+  background-repeat: repeat-x;
+  opacity: 0.7;
+  -webkit-mask-image: linear-gradient(180deg, #000, transparent 85%);
+  mask-image: linear-gradient(180deg, #000, transparent 85%);
+  animation: ap-slide 34s linear infinite;
+}
+.about-premium .ap-bubble { position: absolute; border-radius: 50%; will-change: transform, opacity; animation: ap-drift ease-in-out infinite; }
+.about-premium .ap-dot {
+  position: absolute; border-radius: 50%;
+  background: radial-gradient(circle, #fff 0 35%, rgba(96, 165, 250, 0.85) 70%, rgba(96, 165, 250, 0));
+  box-shadow: 0 0 8px rgba(20, 184, 196, 0.45);
+  animation: ap-dot ease-in-out infinite;
+}
+.about-premium .ap-spark,
+.about-premium .ap-gem {
+  background: linear-gradient(135deg, var(--ap-aqua-soft), #4f9bf5);
+  clip-path: polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%);
+  opacity: 0;
+  animation: ap-twinkle 3.6s ease-in-out infinite;
+}
+.about-premium .ap-spark { position: absolute; }
+
+/* waves + foam along the bottom edge (front wave is white so it melts into the next section) */
+.about-premium .ap-waves { position: absolute; left: 0; right: 0; bottom: -1px; height: 120px; overflow: hidden; }
+.about-premium .ap-wave {
+  position: absolute; left: 0; bottom: 0;
+  width: 200%;
+  background-repeat: repeat-x;
+  background-size: 50% 100%;
+  will-change: transform;
+}
+.about-premium .ap-wave-back {
+  height: 120px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120' preserveAspectRatio='none'%3E%3Cpath fill='%2314b8c4' fill-opacity='0.16' d='M0,60 C240,0 480,0 720,60 S1200,120 1440,60 V120 H0 Z'/%3E%3C/svg%3E");
+  animation: ap-slide 26s linear infinite;
+}
+.about-premium .ap-wave-mid {
+  height: 100px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120' preserveAspectRatio='none'%3E%3Cpath fill='%231e6fd9' fill-opacity='0.11' d='M0,70 C300,10 420,10 720,70 S1140,130 1440,70 V120 H0 Z'/%3E%3C/svg%3E");
+  animation: ap-slide 19s linear infinite reverse;
+}
+.about-premium .ap-wave-front {
+  height: 78px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120' preserveAspectRatio='none'%3E%3Cpath fill='%23ffffff' d='M0,84 C260,34 460,34 720,84 S1180,134 1440,84 V120 H0 Z'/%3E%3C/svg%3E");
+  animation: ap-slide 13s linear infinite;
+}
+.about-premium .ap-foam {
+  position: absolute;
+  bottom: 52px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff 0 30%, rgba(255, 255, 255, 0.6) 62%, rgba(180, 232, 240, 0.45));
+  border: 1px solid rgba(20, 184, 196, 0.28);
+  animation: ap-foam 6s ease-in-out infinite;
+}
+
+/* ---------- keyframes (transform / opacity only) ---------- */
+@keyframes ap-drift {
+  0%   { transform: translate3d(0, 50px, 0) scale(0.85); opacity: 0; }
+  14%  { opacity: 1; }
+  50%  { transform: translate3d(calc(var(--dx) * 0.6), -120px, 0) scale(1); }
+  86%  { opacity: 1; }
+  100% { transform: translate3d(var(--dx), -280px, 0) scale(1.05); opacity: 0; }
+}
+@keyframes ap-dot {
+  0%   { transform: translate3d(0, 0, 0); opacity: 0; }
+  20%  { opacity: 0.9; }
+  80%  { opacity: 0.9; }
+  100% { transform: translate3d(10px, -120px, 0); opacity: 0; }
+}
+@keyframes ap-twinkle {
+  0%, 100% { opacity: 0; transform: scale(0.3) rotate(0deg); }
+  45%, 55% { opacity: 0.95; transform: scale(1) rotate(45deg); }
+}
+@keyframes ap-glow { 0%, 100% { transform: translate3d(0, 0, 0) scale(1); } 50% { transform: translate3d(-40px, 30px, 0) scale(1.08); } }
+@keyframes ap-slide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes ap-foam { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+@keyframes ap-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+@keyframes ap-ripple {
+  0%   { transform: translate(-50%, -50%) scale(0.55); opacity: 0; }
+  12%  { opacity: 0.9; }
+  100% { transform: translate(-50%, -50%) scale(1.45); opacity: 0; }
+}
+@keyframes ap-glint { from { transform: translateX(0) skewX(-18deg); } to { transform: translateX(520%) skewX(-18deg); } }
+@keyframes ap-pulse { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(1.6); opacity: 0; } }
+
+/* ---------- tablet + phone ---------- */
+@media (max-width: 991px) {
+  .about-premium { padding: 5rem 0 8rem; }
+  .about-premium .ap-media { max-width: 520px; }
+  .about-premium .ap-photo { aspect-ratio: var(--ap-ratio-mobile); }
+  .about-premium .ap-ripple { width: 100%; }
+}
+@media (max-width: 767px) {
+  .about-premium { padding: 3.75rem 0 7rem; }
+  .about-premium .ap-grid { gap: 2.25rem; }
+  .about-premium .ap-from-left.reveal:not(.is-visible) { transform: translateX(-24px); }
+  .about-premium .ap-from-right.reveal:not(.is-visible) { transform: translateX(24px); }
+  .about-premium .ap-card { padding: 1.7rem 1.5rem 1.8rem; border-radius: 24px; }
+  .about-premium .ap-frame { padding: 8px; border-radius: 30px; }
+  .about-premium .ap-photo { border-radius: 23px; }
+  .about-premium .ap-plate { inset: 20px -12px -14px 20px; border-radius: 34px; }
+  .about-premium .ap-orb-1 { width: 40px; height: 40px; left: -14px; }
+  .about-premium .ap-orb-2 { right: -10px; }
+  .about-premium .ap-glow { opacity: 0.8; }
+  .about-premium .ap-backdrop > .ap-bubble:nth-child(even),
+  .about-premium .ap-backdrop > .ap-dot:nth-child(even) { display: none; }
+  .about-premium .ap-waves { height: 96px; }
+  .about-premium .ap-foam { bottom: 40px; }
+}
+
+/* ---------- respect reduced-motion settings ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .about-premium *,
+  .about-premium *::before,
+  .about-premium *::after { animation: none !important; transition: none !important; }
+  .about-premium .reveal { opacity: 1 !important; transform: none !important; }
+  .about-premium .ap-ripple,
+  .about-premium .ap-glint { display: none; }
+  .about-premium .ap-spark,
+  .about-premium .ap-gem { opacity: 0.8; }
+}
