@@ -550,7 +550,7 @@ export default function BookingForm() {
 
       {status === "blocked" && (
         <p className="field-error form-blocked" role="alert">
-          Your browser blocked WhatsApp from opening.{" "}
+          Check WhatsApp{" "}
           <a
             href={pendingUrl}
             target="_blank"
