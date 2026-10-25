@@ -1,19 +1,21 @@
+
 import { useState } from "react";
 import Icon from "./Icon";
 import { company, navLinks } from "../data/siteData";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+
   const close = () => setOpen(false);
 
   return (
-    <header className="site-header">
+    <header className="site-header luxury-header">
       <div className="container nav-inner">
         <a
           href="#home"
           className="brand"
           onClick={close}
-          aria-label="Future Nova Cleaning Service, home"
+          aria-label="Future Nova home"
         >
           <img
             className="brand-logo"
@@ -26,46 +28,71 @@ export default function Navbar() {
           </span>
         </a>
 
-        <nav
-          className={`nav-links ${open ? "is-open" : ""}`}
-          aria-label="Main navigation"
-        >
+        {/* Desktop navigation */}
+        <nav className="desktop-nav" aria-label="Desktop navigation">
           {navLinks.map(([href, label]) => (
-            <a key={href} href={href} onClick={close}>
+            <a key={href} href={href}>
               {label}
             </a>
           ))}
-
-          <div className="nav-cta-mobile">
-            {/* <a
-              className="btn-fn btn-fn-primary"
-              href="#contact"
-              onClick={close}
-            >
-              Book a cleaning
-            </a> */}
-          </div>
         </nav>
 
+        {/* Desktop actions */}
         <div className="nav-actions">
           <a className="nav-phone" href={`tel:${company.phones[0]}`}>
-            <Icon name="phone" size={18} /> {company.phones[0]}
+            <Icon name="phone" size={18} />
+            {company.phones[0]}
           </a>
-
           <a className="btn-fn btn-fn-primary" href="#contact">
             Book now
           </a>
         </div>
 
+        {/* Mobile menu button */}
         <button
-          className="nav-toggle"
-          onClick={() => setOpen(!open)}
+          type="button"
+          className={`luxury-toggle ${open ? "active" : ""}`}
+          onClick={() => setOpen((previous) => !previous)}
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
         >
-          <Icon name={open ? "close" : "menu"} size={26} />
+          <span className="luxury-toggle-label">
+            {open ? "CLOSE" : "MENU"}
+          </span>
+          <span className="luxury-toggle-circle">
+            <span />
+            <span />
+          </span>
         </button>
       </div>
+
+      {/* Mobile navigation */}
+      <nav
+  className={`luxury-links ${open ? "is-open" : ""}`}
+  aria-label="Mobile navigation"
+  aria-hidden={!open}
+  inert={!open}
+>
+  <div className="luxury-menu-inner">
+    <div className="luxury-menu-items">
+      {navLinks.map(([href, label], index) => (
+        <a
+          key={href}
+          href={href}
+          onClick={close}
+          className="luxury-menu-link"
+          style={{ "--lux-index": index }}
+        >
+          <span className="luxury-number">
+            {String(index + 1).padStart(2, "0")}
+          </span>
+          <span className="luxury-link-text">{label}</span>
+          <span className="luxury-arrow">↗</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</nav>
     </header>
   );
 }

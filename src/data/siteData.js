@@ -13,7 +13,7 @@ export const navLinks = [
   ["#home", "Home"],
   ["#services", "Services"],
   ["#about", "About"],
-  ["#why-us", "Why us"],
+  ["#why-us", "Why Us"],
   ["#faq", "FAQs"],
   ["#contact", "Contact"],
 ];

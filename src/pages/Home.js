@@ -95,7 +95,10 @@ export default function Home() {
           <div className="row g-4">
             {services.map((service, i) => (
               <Reveal className="col-md-6 col-xl-4" delay={Math.min(i * 35, 280)} key={service.id}>
-                <article className="service-card service-detail-card">
+                <article
+  className="service-card service-detail-card"
+  id={`service-${service.id}`}
+>
                   {service.image && (
                     <div className="service-card-image">
                       <img src={service.image} alt={`${service.title} service`} loading="lazy" />

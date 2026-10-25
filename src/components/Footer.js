@@ -48,14 +48,20 @@ export default function Footer() {
             </ul>
           </nav>
 
-          <div className="col-6 col-lg-3">
-            <h4>Our services</h4>
-            <ul className="footer-links">
-              {services.map((service) => (
-                <li key={service.id}><a href="#services">{service.title}</a></li>
-              ))}
-            </ul>
-          </div>
+       
+<div className="col-6 col-lg-3">
+  <h4>Our services</h4>
+  <ul className="footer-links">
+    {services.map((service) => (
+      <li key={service.id}>
+        <a href={`#service-${service.id}`}>
+          {service.title}
+        </a>
+      </li>
+    ))}
+  </ul>
+</div>
+
 
           <div className="col-lg-4">
             <h4>Get in touch</h4>
