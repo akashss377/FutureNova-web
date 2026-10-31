@@ -67,11 +67,11 @@ export default function Navbar() {
       </div>
 
       {/* Mobile navigation */}
-      <nav
+  <nav
   className={`luxury-links ${open ? "is-open" : ""}`}
   aria-label="Mobile navigation"
   aria-hidden={!open}
-  inert={!open}
+  inert={!open ? "" : undefined}
 >
   <div className="luxury-menu-inner">
     <div className="luxury-menu-items">
